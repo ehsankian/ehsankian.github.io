@@ -26,9 +26,14 @@
 
 .app-content {
     /* background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%); */
-    gap: 2px;
-    padding: 3px;
-    overflow-y: auto;
+    /* gap: 2px;
+    padding: 3px;*/
+    overflow-y: auto; 
+    background-color: #EEEEEE;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+    padding: 5px 10px;
 
 }
 
