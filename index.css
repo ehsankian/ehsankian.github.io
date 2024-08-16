@@ -1,88 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="index.css" rel="stylesheet" />
-    <title>Home</title>
-  </head>
-  <body>
-    <div class="app">
-      <div class="header">
-        <div class="logo">
-          <p>Ehsan Kian</p>
-        </div>
-        <div class="navbar">
-          <ul>
-            <li class="nav-item">
-              <a href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a href="tictactoe.html">Tic Tac Toe</a>
-            </li>
-            <li class="nav-item">
-              <a href="#">Home</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="sidebar">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus,
-          sequi
-          <a
-            href="https://www.google.com"
-            target="_blank"
-            style="font-weight: bold; color: red"
-            >Google</a
-          >
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia,
-          tenetur.
-        </p>
-      </div>
-      <div class="content">
-        <p>Hello HTML</p>
-        <table>
-          <thead>
-            <tr>
-              <th colspan="3" class="th1">My Table</th>
-            </tr>
-            <tr class="th2">
-              <th>id</th>
-              <th>name</th>
-              <th>number</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="odd">
-              <td>1</td>
-              <td>ehsan</td>
-              <td>9811150026</td>
-            </tr>
-            <tr class="even">
-              <td>2</td>
-              <td>hossein</td>
-              <td>9811150025</td>
-            </tr>
-            <tr class="odd">
-              <td>1</td>
-              <td>ali</td>
-              <td>9811150010</td>
-            </tr>
-            <tr class="even">
-              <td>2</td>
-              <td>mohammad</td>
-              <td>9811150020</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="cards">
-          <div class="card"><p>Card 1</p></div>
-          <div class="card"><p>Card 2</p></div>
-          <div class="card"><p>Card 3</p></div>
-          <div class="card"><p>Card 4</p></div>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  font-family: monospace;
+}
+html {
+    font-size: 62.5%;
+}
+ul {
+  list-style: none;
+}
+table,
+td,
+th {
+  border: solid 1px black;
+  border-collapse: collapse;
+  text-align: center;
+}
+.th1 {
+  color: white;
+  background: green;
+}
+.th2 {
+  background: lightgreen;
+}
+.odd {
+  background: lightgray;
+}
+.even {
+  background: gray;
+  color: white;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 1px;
+  height: 100vh;
+  background-color: black;
+}
+.sidebar {
+  display: none;
+
+}
+.header {
+  background-color: #3741fc;
+  display: flex;
+  justify-content: space-between;
+
+}
+.logo {
+    align-self: center
+}
+.logo p{
+    font-weight: bolder;
+    font-size: 2.5rem;
+    color: white;
+    margin-left: 10px;
+}
+.navbar {
+  display: flex;
+  justify-content: center;
+}
+.navbar ul {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 10%;
+}
+.nav-item a {
+  color: white;
+  text-wrap: nowrap;
+  font-size: 1.6rem;
+}
+.nav-item {
+  padding: 10px;
+  display: inline-block;
+}
+.content {
+    background: linear-gradient(109.6deg, rgb(81, 114, 233) 11.2%, rgb(27, 87, 151) 51.2%, rgb(0, 0, 0) 98.6%);
+}
+
+@media (min-width: 768px){
+  .app {
+    display: grid;
+    grid-template-columns: 300px auto;
+    grid-template-rows: auto 1fr;
+  }
+  .header {
+    grid-column: 1 / 3;
+  }
+  .sidebar {
+    display: block;
+    background-color: blueviolet;
+    max-width: 300px;
+    border-radius: 5px;
+  }
+  .sidebar p {
+    font-size: 1.8rem;
+    text-align: justify;
+
+  }
+  .nav-item {
+    margin-right: 30px;
+  }
+  .content p, table{
+    font-size: 2rem;
+  }
+}
