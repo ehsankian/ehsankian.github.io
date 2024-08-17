@@ -131,7 +131,7 @@ th {
 .profile {
     width: 100px;
     height: 100px;
-    border-radius: 50%;
+    clip-path: circle(40%);
 }
 .name {
     margin-top: 10px;
