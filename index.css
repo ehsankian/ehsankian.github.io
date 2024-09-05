@@ -3,7 +3,7 @@
   padding: 0;
   list-style: none;
   text-decoration: none;
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 html {
   font-size: 62.5%;
@@ -77,41 +77,42 @@ th {
   display: inline-block;
 }
 .content {
-  background: linear-gradient(
-    109.6deg,
-    rgb(81, 114, 233) 11.2%,
-    rgb(27, 87, 151) 51.2%,
-    rgb(0, 0, 0) 98.6%
-  );
+  background: url(./images/IMG_20210125_132228.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: scroll;
 }
-.card1 > p{
-    font-size: 2.5rem;
-    margin-bottom: 5px;
+.card1 > p
+{
+  font-size: 2.5rem;
+  margin-bottom: 5px;
 }
-.smile{
-    background-color: rgba(255, 0, 0, 0.3);
-    width: 100px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    clip-path: circle();
-    transform: rotate(90deg);
+.smile {
+  background-color: rgba(255, 0, 0, 0.3);
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  clip-path: circle();
+  transform: rotate(90deg);
 }
-.smile > p{
-    font-size: 2.5rem;
+.smile > p {
+  font-size: 2.5rem;
 }
 .card > table {
-    font-size: 2rem;
+  font-size: 2rem;
 }
-.card2 th, .card2 td{
-    padding: 0 5px;
+.card2 th,
+.card2 td {
+  padding: 0 5px;
 }
 .shape {
-    width: 200px;
-    height: 200px;
-    background-color: #bd317e;
-    clip-path: polygon(50% 0, 20% 50%, 50% 100%, 80% 50%);
+  width: 200px;
+  height: 200px;
+  background-color: #2ff736;
+  clip-path: polygon(50% 0, 20% 50%, 50% 100%, 80% 50%);
 }
 .card {
   background-color: rgb(255, 250, 240);
@@ -124,27 +125,29 @@ th {
   height: 200px;
   margin-top: 5px;
 }
-.card h2{
-    margin-bottom: 20px;
-    font-weight: bold;
-    font-size: 2rem;
+.card h2 {
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 2rem;
 }
 .profile {
-    width: 100px;
-    height: 100px;
-    clip-path: circle(40%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
 .name {
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 2.5rem;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 2.5rem;
 }
 .text {
-    margin: 0 10px;
-    height: 95%;
-    overflow: scroll;
-    font-size: 2rem;
+  margin: 0 10px;
+  height: 95%;
+  overflow: scroll;
+  font-size: 2rem;
 }
+
+
 @media (min-width: 768px) {
   .app {
     display: grid;
@@ -156,7 +159,7 @@ th {
   }
   .sidebar {
     display: block;
-    background-color: #3762fc;
+    background-color: rgb(255, 137, 86);
     max-width: 300px;
     border-right: 2px solid white;
   }
@@ -176,10 +179,10 @@ th {
     grid-template-columns: repeat(2, 1fr);
     padding: 0 5px;
   }
-  .card1 > p{
+  .card1 > p {
     font-size: 1.5rem;
   }
-  .card2 table{
+  .card2 table {
     font-size: 1.5rem;
   }
 }
