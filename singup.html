@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <div class="app">
+        <div class="app-signup">
+            <div class="app-signup-top">
+                <p class="logo">Ehsan Kian</p>
+                <button class="back">
+                    <a href="index.html">
+                        <i class="fa-solid fa-x"></i>
+                    </a>
+                </button>
+                <h1 class="title">Sign up</h1>
+            </div>
+            <p class="login">
+                Already have an account?
+                <a href="#" class="login-link">Log in</a>
+            </p>
+            <div class="social">
+                <button type="button">
+                    <div class="button-text">Google</div>
+                    <div class="button-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
+                            <path fill="#FFC107"
+                                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
+                            <path fill="#FF3D00"
+                                d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
+                            <path fill="#4CAF50"
+                                d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
+                            <path fill="#1976D2"
+                                d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
+                        </svg>
+                    </div>
+                </button>
+                <button type="button">
+                    <div class="button-text">Facebook</div>
+                    <div class="button-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0,0,256,256" width="24px" height="24px" fill-rule="nonzero">
+                            <g fill="#0080ff" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+                                font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                <g transform="scale(5.33333,5.33333)">
+                                    <path
+                                        d="M29,3c-5.523,0 -10,4.477 -10,10v5h-6v8h6v19h8v-19h7l1,-8h-8v-4c0,-2.209 1.791,-4 4,-4h4v-6.678c-1.909,-0.197 -4.079,-0.326 -6,-0.322z">
+                                    </path>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button">
+                    <div class="button-text">Github</div>
+                    <div class="button-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="24px" height="24px">
+                            <path
+                                d="M32 6C17.641 6 6 17.641 6 32c0 12.277 8.512 22.56 19.955 25.286-.592-.141-1.179-.299-1.755-.479V50.85c0 0-.975.325-2.275.325-3.637 0-5.148-3.245-5.525-4.875-.229-.993-.827-1.934-1.469-2.509-.767-.684-1.126-.686-1.131-.92-.01-.491.658-.471.975-.471 1.625 0 2.857 1.729 3.429 2.623 1.417 2.207 2.938 2.577 3.721 2.577.975 0 1.817-.146 2.397-.426.268-1.888 1.108-3.57 2.478-4.774-6.097-1.219-10.4-4.716-10.4-10.4 0-2.928 1.175-5.619 3.133-7.792C19.333 23.641 19 22.494 19 20.625c0-1.235.086-2.751.65-4.225 0 0 3.708.026 7.205 3.338C28.469 19.268 30.196 19 32 19s3.531.268 5.145.738c3.497-3.312 7.205-3.338 7.205-3.338.567 1.474.65 2.99.65 4.225 0 2.015-.268 3.19-.432 3.697C46.466 26.475 47.6 29.124 47.6 32c0 5.684-4.303 9.181-10.4 10.4 1.628 1.43 2.6 3.513 2.6 5.85v8.557c-.576.181-1.162.338-1.755.479C49.488 54.56 58 44.277 58 32 58 17.641 46.359 6 32 6zM33.813 57.93C33.214 57.972 32.61 58 32 58 32.61 58 33.213 57.971 33.813 57.93zM37.786 57.346c-1.164.265-2.357.451-3.575.554C35.429 57.797 36.622 57.61 37.786 57.346zM32 58c-.61 0-1.214-.028-1.813-.07C30.787 57.971 31.39 58 32 58zM29.788 57.9c-1.217-.103-2.411-.289-3.574-.554C27.378 57.61 28.571 57.797 29.788 57.9z" />
+                        </svg>
+                    </div>
+                </button>
+                <button type="button">
+                    <div class="button-text">Feide</div>
+                    <div class="button-icon">
+                        <svg id="Layer_1" role="img" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 32 38" width="24" height="24" class="LoginModal_feide_icon__Yu0E+">
+                            <defs></defs>
+                            <title>Horisontal_Feide</title>
+                            <rect class="cls-1" x="27.99" y="20.34" width="4.24" height="10.18" fill="#1f4698">
+                            </rect>
+                            <polygon class="cls-1"
+                                points="18.23 23.31 13.99 23.31 13.99 34.76 4.24 34.76 4.24 20.34 0 20.34 0 35.61 0.02 35.61 0.02 39 32.23 39 32.23 34.76 18.23 34.76 18.23 23.31"
+                                fill="#1f4698"></polygon>
+                            <circle class="cls-1" cx="16.11" cy="16.53" r="2.54" fill="#1f4698"></circle>
+                            <path fill="#1f4698" class="cls-1"
+                                d="M16.11,4.24A11.87,11.87,0,0,1,28,16.1h4.25A16.11,16.11,0,0,0,0,16.1H4.25A11.87,11.87,0,0,1,16.11,4.24Z">
+                            </path>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+            <p class="or">OR</p>
+            <form id="form1">
+                <input type="email" placeholder="email">
+                <input type="password" placeholder="password">
+                <input type="text" placeholder="first name">
+                <input type="text" placeholder="last name">
+                <button type="submit" form="form1">
+                    Sign Up
+                </button>
+            </form>
+            <div class="conditions">
+                By signing up you agree to our
+                <a href="#" class="terms">Terms of Service</a> and
+                <a href="#" class="policy">Privacy Policy</a>
+            </div>
+            <div class="email-checkbox">
+                <input type="checkbox" checked>
+                <span class="checkbox-text"> email me with news and updates</span>
+            </div>
+        </div>
+        <div class="app-content">
+            <div class="leftside-logo">
+                Ehsan Kian
+            </div>
+            <div class="leftside-content">
+                <h1 class="leftside-title">Become a
+                    <span class="title-wrap">Member💚</span>
+                </h1>
+                <p class="leftside-subtitle">Free to use, easy to love</p>
+                <ul class="leftside-featurelist">
+                    <li>
+                        <div class="leftside-iconcontainer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em"
+                                fill="currentColor" class="LeftSide_checkIcon__1WQ4A">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z">
+                                </path>
+                            </svg>
+                        </div>
+                        Track your progress
+                    </li>
+                    <li>
+                        <div class="leftside-iconcontainer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em"
+                                fill="currentColor" class="LeftSide_checkIcon__1WQ4A">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z">
+                                </path>
+                            </svg>
+                        </div>
+                        Set your goals
+                    </li>
+                    <li>
+                        <div class="leftside-iconcontainer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em"
+                                fill="currentColor" class="LeftSide_checkIcon__1WQ4A">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z">
+                                </path>
+                            </svg>
+                        </div>
+                        Get a personalized learning path
+                    </li>
+                    <li>
+                        <div class="leftside-iconcontainer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em"
+                                fill="currentColor" class="LeftSide_checkIcon__1WQ4A">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z">
+                                </path>
+                            </svg>
+                        </div>
+                        Test your skills
+                    </li>
+                    <li>
+                        <div class="leftside-iconcontainer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em"
+                                fill="currentColor" class="LeftSide_checkIcon__1WQ4A">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z">
+                                </path>
+                            </svg>
+                        </div>
+                        Practice coding in browser
+                    </li>
+                    <li>
+                        <div class="leftside-iconcontainer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em"
+                                fill="currentColor" class="LeftSide_checkIcon__1WQ4A">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z">
+                                </path>
+                            </svg>
+                        </div>
+                        Build and host a website
+                    </li>
+                    <li>
+                        <div class="leftside-iconcontainer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em"
+                                fill="currentColor" class="LeftSide_checkIcon__1WQ4A">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z">
+                                </path>
+                            </svg>
+                        </div>
+                        Teacher Toolbox
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
