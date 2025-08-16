@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link href="/static/css/index.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/calculator.css">
+
+    <title>Homepage</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="">Ehsan Kian</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Pricing</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="container-fluid p-3" id="sec1">
+            <h2 class="mb-5">Part one</h2>
+            <div class="row d-flex justify-content-around mb-5">
+                <div class="col-4 col-lg-3">
+                    <label for="draw" class="form-label">Draw</label>
+                    <select id="draw" class="form-select">
+                        <option value="0" selected>Choose...</option>
+                        <option value="1">Mythic Character</option>
+                        <option value="2">Mythic Gun</option>
+                        <option value="3">Legendary Character</option>
+                        <option value="4">Legendary Gun (Reactive)</option>
+                        <option value="5">Legendary Gun (Non-reactive)</option>
+                        <option value="6">Legendary Gun (7 Draws)</option>
+                    </select>
+                </div>
+                <div class="col-4 col-lg-3">
+                    <label for="price" class="form-label">First draw price</label>
+                    <select id="price" class="form-select">
+                        <option value="0" selected>Choose...</option>
+                    </select>
+                </div>
+                <div class="col col-lg-2">
+                    <label for="discount" class="form-label">Discount</label>
+                    <select id="discount" class="form-select">
+                        <option value="0" id="zeroDiscount">0%</option>
+                        <option value="10">10%</option>
+                        <option value="15">15%</option>
+                        <option value="20">20%</option>
+                    </select>
+                </div>
+                <!-- <div class="col mt-3">
+                    <button type="button" class="btn btn-primary" id="submit">submit</button>
+                </div> -->
+            </div>
+            <div class="row fs-5">
+                <p id="result">Cost:</p>
+                <p id="total">Total:</p>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+
+    </footer>
+
+    <script src="/static/js/calculator.js"></script>
+    <script src="/static/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

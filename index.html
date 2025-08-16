@@ -4,116 +4,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet" />
-  <link href="index.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/bootstrap.css">
+  <link href="/static/css/index.css" rel="stylesheet" />
+
   <title>Homepage</title>
 </head>
 
 <body>
-  <div class="app">
-    <div class="header">
-      <div class="logo">
-        <p>Ehsan Kian</p>
-      </div>
-      <div class="navbar">
-        <ul>
-          <li class="nav-item">
-            <a href="about.html">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="tictactoe.html">Tic Tac Toe</a>
-          </li>
-          <li class="nav-item">
-            <a href="./singup.html">Sign Up</a>
-          </li>
-          <li class="nav-item">
-            <a href="#">Home</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="sidebar">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus,
-        sequi
-        <a href="https://www.google.com" target="_blank" style="font-weight: bold; color: red">Google</a>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia,
-        tenetur.
-      </p>
-    </div>
-    <div class="content">
-      <div class="cards">
-        <div class="card card1">
-          <h2>Welcome</h2>
-          <p>Hello HTML</p>
-          <p>This is my practice site</p>
-          <div class="smile">
-            <p>;)</p>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="">Ehsan Kian</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="#">Pricing</a>
           </div>
         </div>
-        <div class="card card2">
-          <h2>Table</h2>
-          <table>
-            <thead>
-              <tr>
-                <th colspan="3" class="th1">My Table</th>
-              </tr>
-              <tr class="th2">
-                <th>id</th>
-                <th>name</th>
-                <th>number</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="odd">
-                <td>1</td>
-                <td>ehsan</td>
-                <td>9811150026</td>
-              </tr>
-              <tr class="even">
-                <td>2</td>
-                <td>hossein</td>
-                <td>9811150025</td>
-              </tr>
-              <tr class="odd">
-                <td>3</td>
-                <td>ali</td>
-                <td>9811150010</td>
-              </tr>
-              <tr class="even">
-                <td>4</td>
-                <td>mohammad</td>
-                <td>9811150020</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="card">
-          <h2>Shape</h2>
-          <div class="shape"></div>
-        </div>
-        <div class="card">
-          <h2>Profile Picture</h2>
-          <img src="images/blank-profile-picture.webp" alt="profile image" class="profile" />
-          <p class="name">Ehsan Kian</p>
-        </div>
-        <div class="card">
-          <h2>Text</h2>
-          <p class="text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos nemo
-            velit labore cum hic fugit quod pariatur dicta culpa voluptas
-            voluptatum voluptatibus neque dolorum rerum molestias ducimus
-            eveniet, obcaecati voluptatem.
-          </p>
-        </div>
-        
       </div>
-    </div>
-  </div>
+    </nav>
+  </header>
+  <main>
+    <section class="row d-flex justify-content-center bg-light-subtle p-3">
+      <div class="col-6">
+        <img src="/static/images/codm-characters.jpg" alt="codm characters" class="img-thumbnail rounded">
+      </div>
+      <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+          <h1 class="h1">Codm lucky draw</h1>
+          <p>calculate how much CP you need</p>
+          <a type="button" class="btn btn-primary w-50 more" href="calculator.html">More</a>
+      </div>
+
+    </section>
+
+  </main>
+  <footer>
+
+  </footer>
+
+  <script src="/static/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>
