@@ -150,7 +150,6 @@ function validation(){
 
 function calculate(){
     if(validation()){
-        console.log(1)
         const drawPrice = drawCost[draw.value][price.value];
         let cp = inputCP.value;
         let index = 0;
@@ -166,6 +165,16 @@ function calculate(){
 
         document.getElementById('numberOfSpins').textContent = count;
         document.getElementById('remainingCP').textContent = cp;
+
+        console.log('dc'+ drawPrice.length)
+
+        for (let h = 0; h < drawPrice.length; h++) {
+            document.getElementById('cost-'+h).classList.remove('red')
+        }
+
+        for (let k = 0; k < count; k++){
+            document.getElementById('cost-'+k).classList.add('red')
+        }
     }
 }
 

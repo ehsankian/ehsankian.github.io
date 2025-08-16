@@ -25,3 +25,11 @@ main{
 .red{
     color: orangered;
 }
+
+
+
+@media screen and (max-width: 768px) {
+    .left-border{
+    border-left:1px solid #dee2ed ;
+}
+}
