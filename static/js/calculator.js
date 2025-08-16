@@ -36,6 +36,7 @@ const drawCost = {
     }
 };
 
+
 const draw = document.getElementById('draw')
 const price = document.getElementById('price');
 const btn = document.getElementById('calculate');
@@ -61,14 +62,14 @@ function update(){
         discount.disabled = false;
     }
 
-    if (selectedDraw == '1' || selectedDraw == '2'){
-        upgradePart.classList.add('d-block')
-        upgradePart.classList.remove('d-none')
-    }
-    else{
-         upgradePart.classList.add('d-none')
-         upgradePart.classList.remove('d-block')
-    }
+    // if (selectedDraw == '1' || selectedDraw == '2'){
+    //     upgradePart.classList.add('d-block')
+    //     upgradePart.classList.remove('d-none')
+    // }
+    // else{
+    //      upgradePart.classList.add('d-none')
+    //      upgradePart.classList.remove('d-block')
+    // }
 
     if (selectedDraw != '0'){
 
