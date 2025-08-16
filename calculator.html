@@ -31,11 +31,12 @@
             </div>
         </nav>
     </header>
-    <main>
-        <section class="container-fluid p-3" id="sec1">
-            <h2 class="mb-5">Part one</h2>
-            <div class="row d-flex justify-content-around mb-5">
-                <div class="col-4 col-lg-3">
+    <main class="bggrad p-3">
+        <section class="col-lg-10 col-xxl-7 container-fluid p-3 border border-black rounded bg-body-tertiary mb-1">
+            <h2 class="">Lucky Draw</h2>
+            <hr class="mb-4">
+            <div class="row d-flex justify-content-around justify-content-sm-center g-5 mb-5">
+                <div class="col-6 col-md-3">
                     <label for="draw" class="form-label">Draw</label>
                     <select id="draw" class="form-select">
                         <option value="0" selected>Choose...</option>
@@ -46,30 +47,65 @@
                         <option value="5">Legendary Gun (Non-reactive)</option>
                         <option value="6">Legendary Gun (7 Draws)</option>
                     </select>
+                    <div id="drawFeedback" class="invalid-feedback">
+                        Please select a valid Draw.
+                    </div>
                 </div>
-                <div class="col-4 col-lg-3">
+                <div class="col-6 col-md-3">
                     <label for="price" class="form-label">First draw price</label>
                     <select id="price" class="form-select">
                         <option value="0" selected>Choose...</option>
                     </select>
+                    <div class="invalid-feedback">
+                        Please select a first draw price.
+                    </div>
                 </div>
-                <div class="col col-lg-2">
+                <div class="col-12 col-md-2">
                     <label for="discount" class="form-label">Discount</label>
                     <select id="discount" class="form-select">
                         <option value="0" id="zeroDiscount">0%</option>
                         <option value="10">10%</option>
                         <option value="15">15%</option>
                         <option value="20">20%</option>
-                    </select>
+                    </select>  
                 </div>
-                <!-- <div class="col mt-3">
-                    <button type="button" class="btn btn-primary" id="submit">submit</button>
-                </div> -->
             </div>
-            <div class="row fs-5">
-                <p id="result">Cost:</p>
-                <p id="total">Total:</p>
+            <div class="row">
+                <div class="col-6 col-md-4 border-end">
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" name="cp" id="inputCP">
+                        <span for="inputCP" class="input-group-text">CP</span>
+                        <div class="invalid-feedback">
+                            CP > 0
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" id="calculate">Calculate</button>
+                </div>
+                <div class="col-6 col-md-4 border-end">
+                    <div class="row">
+                        <p class="">Cost:</p>
+                        <div class="" id="result"></div>
+                        <hr class="my-3">
+                        <p class="">Total: <span id="total"></span></p>
+
+                    </div>
+                    <div class="row">
+
+                    </div>
+                </div>
+                <hr class="d-md-none mb-4">
+                <div class="col-12 col-md-4">
+                    <p class="">Awesome! With your current <span id="userCP" class="red">0</span>
+                        CP, you're all set to spin the Lucky Draw <span id="numberOfSpins" class="red">0</span> times.
+                        After those spins, you’ll still have <span id="remainingCP" class="red">0</span> CP remaining.
+                    </p>
+                </div>
             </div>
+        </section>
+        <section class="col-lg-10 col-xxl-7 container-fluid p-3 border border-black rounded bg-body-tertiary" id="upgrade">
+            <h2>Upgrade</h2>
+            <hr class="mb-4">
+
         </section>
 
     </main>

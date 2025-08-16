@@ -38,17 +38,19 @@ const drawCost = {
 
 const draw = document.getElementById('draw')
 const price = document.getElementById('price');
-const btn = document.getElementById('submit');
+const btn = document.getElementById('calculate');
 const result = document.getElementById('result');
 const total = document.getElementById('total');
 const discount = document.getElementById('discount');
 const zeroDiscount = document.getElementById('zeroDiscount');
+const upgradePart = document.getElementById('upgrade');
+const inputCP = document.getElementById('inputCP');
 
 function update(){
     const selectedDraw = this.value;
     
-    result.textContent = 'Cost: ';
-    total.textContent = 'Total: ';
+    result.textContent = '';
+    total.textContent = '';
     price.innerHTML = '<option value="0" selected>Choose...</option>';
 
     if (selectedDraw == '1' || selectedDraw == '2' || selectedDraw == '3'){
@@ -58,7 +60,16 @@ function update(){
     else{
         discount.disabled = false;
     }
-    
+
+    if (selectedDraw == '1' || selectedDraw == '2'){
+        upgradePart.classList.add('d-block')
+        upgradePart.classList.remove('d-none')
+    }
+    else{
+         upgradePart.classList.add('d-none')
+         upgradePart.classList.remove('d-block')
+    }
+
     if (selectedDraw != '0'){
 
         const firstDrawCost = Object.keys(drawCost[selectedDraw])
@@ -83,12 +94,16 @@ function show(){
 
     let sum = 0;
     
-    result.textContent = 'Cost: ';
-    total.textContent = 'Total: ';
+    result.textContent = '';
+    total.textContent = '';
 
-    drawPrice.forEach(cost => {
+    drawPrice.forEach((cost, index) => {
         const span = document.createElement('span');
-        span.textContent = parseInt(cost * (100 - off) / 100) + ' ';
+        span.textContent = parseInt(cost * (100 - off) / 100);
+        span.id = 'cost-' + index;
+        if (index < drawPrice.length - 1){
+            span.textContent += ' - ';
+        }
         result.appendChild(span);
         sum += parseInt(cost * (100 - off) / 100);
     });
@@ -98,6 +113,64 @@ function show(){
     total.appendChild(span);
 }
 
+function validation(){
+    let cp = inputCP.value;
+    let flag = false
+
+    if (cp <= 0){
+        inputCP.classList.add('is-invalid');
+        flag = true;
+    }
+    else{
+        inputCP.classList.remove('is-invalid');
+    }
+
+    if (draw.value == '0'){
+        draw.classList.add('is-invalid');
+        flag = true;
+    }
+    else{
+        draw.classList.remove('is-invalid');
+    }
+
+    if (price.value == '0'){
+        price.classList.add('is-invalid')
+        flag = true;
+    }
+    else{
+        price.classList.remove('is-invalid');
+    }
+
+    if (flag){
+        return false
+    }
+
+    return true;
+}
+
+function calculate(){
+    if(validation()){
+        console.log(1)
+        const drawPrice = drawCost[draw.value][price.value];
+        let cp = inputCP.value;
+        let index = 0;
+        let count = 0;
+        
+        document.getElementById('userCP').textContent = cp;
+
+        while (cp >= drawPrice[index]) {
+            count++;
+            cp -= drawPrice[index];
+            index++;
+        }
+
+        document.getElementById('numberOfSpins').textContent = count;
+        document.getElementById('remainingCP').textContent = cp;
+    }
+}
+
+
 draw.addEventListener('change', update);
 price.addEventListener('change', show);
 discount.addEventListener('change', show);
+btn.addEventListener('click', calculate);
