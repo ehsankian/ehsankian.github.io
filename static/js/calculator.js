@@ -153,21 +153,18 @@ function calculate(){
     if(validation()){
         const drawPrice = drawCost[draw.value][price.value];
         let cp = inputCP.value;
+        let off = discount.value;
         let index = 0;
-        let count = 0;
         
         document.getElementById('userCP').textContent = cp;
 
-        while (cp >= drawPrice[index]) {
-            count++;
-            cp -= drawPrice[index];
+        while (cp >= parseInt(drawPrice[index] * (100 - off) / 100)) {
+            cp -= parseInt(drawPrice[index] * (100 - off) / 100);
             index++;
         }
 
-        document.getElementById('numberOfSpins').textContent = count;
+        document.getElementById('numberOfSpins').textContent = index;
         document.getElementById('remainingCP').textContent = cp;
-
-        console.log('dc'+ drawPrice.length)
 
         for (let h = 0; h < drawPrice.length; h++) {
             document.getElementById('cost-'+h).classList.remove('red')
