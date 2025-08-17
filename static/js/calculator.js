@@ -155,7 +155,7 @@ function calculate(){
         let cp = inputCP.value;
         let off = discount.value;
         let index = 0;
-        
+
         document.getElementById('userCP').textContent = cp;
 
         while (cp >= parseInt(drawPrice[index] * (100 - off) / 100)) {
@@ -170,7 +170,7 @@ function calculate(){
             document.getElementById('cost-'+h).classList.remove('red')
         }
 
-        for (let k = 0; k < count; k++){
+        for (let k = 0; k < index; k++){
             document.getElementById('cost-'+k).classList.add('red')
         }
     }
