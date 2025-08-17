@@ -1,8 +1,3 @@
-const drawType = {
-    '1': ['20', '35', '50'],
-    '2': ['10', '20', '30']
-};
-
 const drawCost = {
     '1': {
         '20': [20, 50, 90, 160, 280, 440, 680, 1100, 1700, 2700],
@@ -40,41 +35,48 @@ const drawCost = {
 const draw = document.getElementById('draw')
 const price = document.getElementById('price');
 const btn = document.getElementById('calculate');
+const clearBtn = document.getElementById('clear');
 const result = document.getElementById('result');
 const total = document.getElementById('total');
 const discount = document.getElementById('discount');
 const zeroDiscount = document.getElementById('zeroDiscount');
 const upgradePart = document.getElementById('upgrade');
 const inputCP = document.getElementById('inputCP');
+const oneCP = document.getElementById('onecp');
+let isBtnUsed = false;
 
 function update(){
     const selectedDraw = this.value;
+    const noDiscount = ['0','1','2','3'];
+    const onecpdiv = document.getElementById('onecpdiv');
     
     result.textContent = '';
     total.textContent = '';
-    price.innerHTML = '<option value="0" selected>Choose...</option>';
+    price.innerHTML = '';
 
-    if (selectedDraw == '1' || selectedDraw == '2' || selectedDraw == '3'){
+    if (draw.firstElementChild.value == '0'){
+        draw.removeChild(draw.firstElementChild)
+    }
+
+    if (noDiscount.includes(selectedDraw)){
         discount.disabled = true;
         zeroDiscount.selected = true;
+        if (!onecpdiv.classList.contains('d-none')){
+            onecpdiv.classList.add('d-none');
+            oneCP.checked = false;
+        }
     }
     else{
         discount.disabled = false;
+        if (onecpdiv.classList.contains('d-none')){
+            onecpdiv.classList.remove('d-none')
+        }
     }
-
-    // if (selectedDraw == '1' || selectedDraw == '2'){
-    //     upgradePart.classList.add('d-block')
-    //     upgradePart.classList.remove('d-none')
-    // }
-    // else{
-    //      upgradePart.classList.add('d-none')
-    //      upgradePart.classList.remove('d-block')
-    // }
 
     if (selectedDraw != '0'){
 
         const firstDrawCost = Object.keys(drawCost[selectedDraw])
-        firstDrawCost.forEach(cost => {
+        firstDrawCost.forEach((cost, index) => {
             const option = document.createElement('option');
             option.value = cost;
             option.textContent = cost;
@@ -82,13 +84,26 @@ function update(){
             if (drawCost[selectedDraw][cost] == null){
                 option.disabled = true;
             }
+            if (index == 0){
+                option.selected = true;
+            }
             price.appendChild(option);
         });
+
+        show();
+
+        if (isBtnUsed){
+            calculate();
+        }
     }
 }
 
 function show(){
     const selectedDraw = draw.value;
+    if (selectedDraw == '0'){
+        return 0;
+    }
+
     const firstDrawCost = price.value;
     const off = discount.value || 0;
     const drawPrice = drawCost[selectedDraw][firstDrawCost];
@@ -100,23 +115,33 @@ function show(){
 
     drawPrice.forEach((cost, index) => {
         const span = document.createElement('span');
-        span.textContent = parseInt(cost * (100 - off) / 100);
+        if (oneCP.checked && index == 0){
+            span.textContent = '1';
+            sum += 1;
+        }
+        else{
+            span.textContent = parseInt(cost * (100 - off) / 100);
+            sum += parseInt(cost * (100 - off) / 100);
+        }
         span.id = 'cost-' + index;
         if (index < drawPrice.length - 1){
             span.textContent += ' - ';
         }
-        result.appendChild(span);
-        sum += parseInt(cost * (100 - off) / 100);
+        result.appendChild(span); 
     });
 
     const span = document.createElement('span');
     span.textContent = sum;
     total.appendChild(span);
+
+    if (isBtnUsed){
+        calculate();
+    }
 }
 
 function validation(){
     let cp = inputCP.value;
-    let flag = false
+    let flag = false;
 
     if (cp <= 0){
         inputCP.classList.add('is-invalid');
@@ -135,7 +160,7 @@ function validation(){
     }
 
     if (price.value == '0'){
-        price.classList.add('is-invalid')
+        price.classList.add('is-invalid');
         flag = true;
     }
     else{
@@ -143,7 +168,7 @@ function validation(){
     }
 
     if (flag){
-        return false
+        return false;
     }
 
     return true;
@@ -155,29 +180,58 @@ function calculate(){
         let cp = inputCP.value;
         let off = discount.value;
         let index = 0;
+        let spinPrice = 1;
+
+        if (!oneCP.checked){
+            spinPrice = parseInt(drawPrice[index] * (100 - off) / 100);
+        }
 
         document.getElementById('userCP').textContent = cp;
 
-        while (cp >= parseInt(drawPrice[index] * (100 - off) / 100)) {
-            cp -= parseInt(drawPrice[index] * (100 - off) / 100);
+        while (cp >= spinPrice) {
+            cp -= spinPrice;
             index++;
+            spinPrice = parseInt(drawPrice[index] * (100 - off) / 100);
         }
 
         document.getElementById('numberOfSpins').textContent = index;
         document.getElementById('remainingCP').textContent = cp;
 
         for (let h = 0; h < drawPrice.length; h++) {
-            document.getElementById('cost-'+h).classList.remove('red')
+            document.getElementById('cost-'+h).classList.remove('red');
         }
 
         for (let k = 0; k < index; k++){
-            document.getElementById('cost-'+k).classList.add('red')
+            document.getElementById('cost-'+k).classList.add('red');
         }
+
+        isBtnUsed = true;
     }
 }
 
+function onecpUpdate(){
+    show();
+    if (isBtnUsed){
+        calculate();
+        return 0;
+    }
+}
+
+function clear(){
+    isBtnUsed = false;
+    document.getElementById('userCP').textContent = 0;
+    document.getElementById('numberOfSpins').textContent = 0;
+    document.getElementById('remainingCP').textContent = 0;
+    inputCP.value = '';
+    if (inputCP.classList.contains('is-invalid')){
+        inputCP.classList.remove('is-invalid')
+    }
+    show();
+}
 
 draw.addEventListener('change', update);
 price.addEventListener('change', show);
 discount.addEventListener('change', show);
 btn.addEventListener('click', calculate);
+oneCP.addEventListener('change', onecpUpdate);
+clearBtn.addEventListener('click', clear)
