@@ -1,237 +1,251 @@
-const drawCost = {
-    '1': {
-        '20': [20, 50, 90, 160, 280, 440, 680, 1100, 1700, 2700],
-        '35': [35, 90, 155, 280, 490, 770, 1200, 2000, 2900, 4700],
-        '50': [50, 130, 220, 400, 700, 1100, 1700, 2800, 4200, 6700]
-    },
-    '2': {
-        '10': [10, 30, 50, 120, 200, 320, 520, 960, 1300, 2300],
-        '20': [20, 55, 80, 210, 350, 560, 900, 1600, 2300, 4000],
-        '30': [30, 80, 120, 300, 500, 800, 1300, 2400, 3400, 5800]
-    }, 
-    '3': {
-        '10': [10, 30, 50, 120, 200, 320, 520, 800, 1500, 2200],
-        '20': [20, 55, 80, 210, 350, 560, 900, 1400, 2700, 3800],
-        '30': [30, 80, 120, 300, 500, 800, 1300, 2400, 3400, 5800]
-    },
-    '4': {
-        '10': [10, 30, 50, 120, 200, 320, 520, 800, 1110, 1800],
-        '20': [20, 55, 80, 210, 350, 560, 900, 1400, 1900, 3200],
-        '30': [30, 80, 120, 300, 500, 800, 1300, 2000, 2800, 4700]
-    },
-    '5': {
-        '10': [10, 30, 50, 120, 200, 320, 520, 800, 1100, 1400],
-        '20': [20, 55, 80, 210, 350, 560, 900, 1400, 1900, 2400],
-        '30': [30, 80, 120, 300, 500, 800, 1300, 2000, 2800, 3900]
-    },
-    '6': {
-        '10': [10, 50, 140, 300, 600, 1100, 1600],
-        '20': null,
-        '30': null
-    }
+/**
+ * Lucky Draw CP Calculator
+ * ------------------------
+ * Calculates the CP (currency) cost of pulling a "Lucky Draw" a certain
+ * number of times, factoring in per-draw discounts and an optional
+ * "1 CP coupon" for the very first pull.
+ */
+
+// ---------------------------------------------------------------------------
+// Pricing data
+// ---------------------------------------------------------------------------
+// Shape: drawCost[drawType][firstDrawPrice] => cumulative cost per pull index.
+// A `null` table means that combination is not offered for that draw type.
+const DRAW_COST = {
+  '1': {
+    '20': [20, 50, 90, 160, 280, 440, 680, 1100, 1700, 2700],
+    '35': [35, 90, 155, 280, 490, 770, 1200, 2000, 2900, 4700],
+    '50': [50, 130, 220, 400, 700, 1100, 1700, 2800, 4200, 6700],
+  },
+  '2': {
+    '10': [10, 30, 50, 120, 200, 320, 520, 960, 1300, 2300],
+    '20': [20, 55, 80, 210, 350, 560, 900, 1600, 2300, 4000],
+    '30': [30, 80, 120, 300, 500, 800, 1300, 2400, 3400, 5800],
+  },
+  '3': {
+    '10': [10, 30, 50, 120, 200, 320, 520, 800, 1500, 2200],
+    '20': [20, 55, 80, 210, 350, 560, 900, 1400, 2700, 3800],
+    '30': [30, 80, 120, 300, 500, 800, 1300, 2400, 3400, 5800],
+  },
+  '4': {
+    '10': [10, 30, 50, 120, 200, 320, 520, 800, 1110, 1800],
+    '20': [20, 55, 80, 210, 350, 560, 900, 1400, 1900, 3200],
+    '30': [30, 80, 120, 300, 500, 800, 1300, 2000, 2800, 4700],
+  },
+  '5': {
+    '10': [10, 30, 50, 120, 200, 320, 520, 800, 1100, 1400],
+    '20': [20, 55, 80, 210, 350, 560, 900, 1400, 1900, 2400],
+    '30': [30, 80, 120, 300, 500, 800, 1300, 2000, 2800, 3900],
+  },
+  '6': {
+    '10': [10, 50, 140, 300, 600, 1100, 1600],
+    '20': null,
+    '30': null,
+  },
 };
 
+// Draw types that never offer a discount, and therefore lock the discount
+// select to 0% and hide the "1 CP coupon" option.
+const NO_DISCOUNT_DRAWS = ['0', '1', '2', '3'];
 
-const draw = document.getElementById('draw')
-const price = document.getElementById('price');
-const btn = document.getElementById('calculate');
-const clearBtn = document.getElementById('clear');
-const result = document.getElementById('result');
-const total = document.getElementById('total');
-const discount = document.getElementById('discount');
-const zeroDiscount = document.getElementById('zeroDiscount');
-const upgradePart = document.getElementById('upgrade');
-const inputCP = document.getElementById('inputCP');
-const oneCP = document.getElementById('onecp');
-let isBtnUsed = false;
+(() => {
+  // -------------------------------------------------------------------------
+  // DOM references
+  // -------------------------------------------------------------------------
+  const drawSelect = document.getElementById('draw');
+  const priceSelect = document.getElementById('price');
+  const discountSelect = document.getElementById('discount');
+  const zeroDiscountOption = document.getElementById('zeroDiscount');
 
-function update(){
-    const selectedDraw = this.value;
-    const noDiscount = ['0','1','2','3'];
-    const onecpdiv = document.getElementById('onecpdiv');
-    
-    result.textContent = '';
-    total.textContent = '';
-    price.innerHTML = '';
+  const calculateBtn = document.getElementById('calculate');
+  const clearBtn = document.getElementById('clear');
 
-    if (draw.firstElementChild.value == '0'){
-        draw.removeChild(draw.firstElementChild)
+  const resultEl = document.getElementById('result');
+  const totalEl = document.getElementById('total');
+
+  const inputCP = document.getElementById('inputCP');
+  const oneCpCheckbox = document.getElementById('onecp');
+  const oneCpWrapper = document.getElementById('onecpdiv');
+
+  const userCpEl = document.getElementById('userCP');
+  const numberOfSpinsEl = document.getElementById('numberOfSpins');
+  const remainingCpEl = document.getElementById('remainingCP');
+
+  // Tracks whether "Calculate" has been run at least once, so later changes
+  // (price, discount, coupon) can live-refresh the result without a re-click.
+  let hasCalculated = false;
+
+  // -------------------------------------------------------------------------
+  // Helpers
+  // -------------------------------------------------------------------------
+
+  /** Applies a percentage discount to a cost and truncates to a whole number. */
+  const applyDiscount = (cost, discountPercent) =>
+    parseInt((cost * (100 - discountPercent)) / 100, 10);
+
+  /** Toggles a Bootstrap validation class on/off based on a condition. */
+  const setInvalid = (el, isInvalid) => el.classList.toggle('is-invalid', isInvalid);
+
+  // -------------------------------------------------------------------------
+  // Core behaviour
+  // -------------------------------------------------------------------------
+
+  /**
+   * Rebuilds the "First draw price" options whenever the Draw type changes,
+   * and toggles discount/coupon availability accordingly.
+   */
+  function handleDrawChange() {
+    const selectedDraw = drawSelect.value;
+
+    resultEl.textContent = '';
+    totalEl.textContent = '';
+    priceSelect.innerHTML = '';
+
+    // Remove the initial "Choose..." placeholder once a real draw is picked.
+    if (drawSelect.firstElementChild.value === '0') {
+      drawSelect.removeChild(drawSelect.firstElementChild);
     }
 
-    if (noDiscount.includes(selectedDraw)){
-        discount.disabled = true;
-        zeroDiscount.selected = true;
-        if (!onecpdiv.classList.contains('d-none')){
-            onecpdiv.classList.add('d-none');
-            oneCP.checked = false;
-        }
-    }
-    else{
-        discount.disabled = false;
-        if (onecpdiv.classList.contains('d-none')){
-            onecpdiv.classList.remove('d-none')
-        }
+    if (NO_DISCOUNT_DRAWS.includes(selectedDraw)) {
+      discountSelect.disabled = true;
+      zeroDiscountOption.selected = true;
+      oneCpWrapper.classList.add('d-none');
+      oneCpCheckbox.checked = false;
+    } else {
+      discountSelect.disabled = false;
+      oneCpWrapper.classList.remove('d-none');
     }
 
-    if (selectedDraw != '0'){
+    if (selectedDraw === '0') return;
 
-        const firstDrawCost = Object.keys(drawCost[selectedDraw])
-        firstDrawCost.forEach((cost, index) => {
-            const option = document.createElement('option');
-            option.value = cost;
-            option.textContent = cost;
-            option.id = 'opt' + cost;
-            if (drawCost[selectedDraw][cost] == null){
-                option.disabled = true;
-            }
-            if (index == 0){
-                option.selected = true;
-            }
-            price.appendChild(option);
-        });
-
-        show();
-
-        if (isBtnUsed){
-            calculate();
-        }
-    }
-}
-
-function show(){
-    const selectedDraw = draw.value;
-    if (selectedDraw == '0'){
-        return 0;
-    }
-
-    const firstDrawCost = price.value;
-    const off = discount.value || 0;
-    const drawPrice = drawCost[selectedDraw][firstDrawCost];
-
-    let sum = 0;
-    
-    result.textContent = '';
-    total.textContent = '';
-
-    drawPrice.forEach((cost, index) => {
-        const span = document.createElement('span');
-        if (oneCP.checked && index == 0){
-            span.textContent = '1';
-            sum += 1;
-        }
-        else{
-            span.textContent = parseInt(cost * (100 - off) / 100);
-            sum += parseInt(cost * (100 - off) / 100);
-        }
-        span.id = 'cost-' + index;
-        if (index < drawPrice.length - 1){
-            span.textContent += ' - ';
-        }
-        result.appendChild(span); 
+    // Populate the price dropdown with every entry price for this draw type.
+    Object.keys(DRAW_COST[selectedDraw]).forEach((cost, index) => {
+      const option = document.createElement('option');
+      option.value = cost;
+      option.textContent = cost;
+      option.id = `opt${cost}`;
+      option.disabled = DRAW_COST[selectedDraw][cost] == null;
+      option.selected = index === 0;
+      priceSelect.appendChild(option);
     });
 
-    const span = document.createElement('span');
-    span.textContent = sum;
-    total.appendChild(span);
+    renderCostBreakdown();
 
-    if (isBtnUsed){
-        calculate();
+    if (hasCalculated) calculateSpins();
+  }
+
+  /**
+   * Renders the per-pull cost breakdown ("Cost: 20 - 50 - 90...") and the
+   * running total for the currently selected draw/price/discount/coupon.
+   */
+  function renderCostBreakdown() {
+    const selectedDraw = drawSelect.value;
+    if (selectedDraw === '0') return 0;
+
+    const drawPrice = DRAW_COST[selectedDraw][priceSelect.value];
+    const discountPercent = discountSelect.value || 0;
+
+    resultEl.textContent = '';
+    totalEl.textContent = '';
+
+    let sum = 0;
+
+    drawPrice.forEach((cost, index) => {
+      const span = document.createElement('span');
+      const isFirstPullWithCoupon = oneCpCheckbox.checked && index === 0;
+      const displayCost = isFirstPullWithCoupon ? 1 : applyDiscount(cost, discountPercent);
+
+      sum += displayCost;
+      span.id = `cost-${index}`;
+      span.textContent = index < drawPrice.length - 1 ? `${displayCost} - ` : `${displayCost}`;
+      resultEl.appendChild(span);
+    });
+
+    const totalSpan = document.createElement('span');
+    totalSpan.textContent = sum;
+    totalEl.appendChild(totalSpan);
+
+    if (hasCalculated) calculateSpins();
+  }
+
+  /**
+   * Validates the three required inputs (CP amount, draw type, price),
+   * flagging any invalid fields with Bootstrap's `is-invalid` class.
+   * Returns true only if every field is valid.
+   */
+  function isFormValid() {
+    const cpIsInvalid = Number(inputCP.value) <= 0;
+    const drawIsInvalid = drawSelect.value === '0';
+    const priceIsInvalid = priceSelect.value === '0';
+
+    setInvalid(inputCP, cpIsInvalid);
+    setInvalid(drawSelect, drawIsInvalid);
+    setInvalid(priceSelect, priceIsInvalid);
+
+    return !(cpIsInvalid || drawIsInvalid || priceIsInvalid);
+  }
+
+  /**
+   * Works out how many times the user can spin with their available CP,
+   * spending it pull-by-pull (each pull costs more than the last) and
+   * highlighting the affordable pulls in the cost breakdown.
+   */
+  function calculateSpins() {
+    if (!isFormValid()) return;
+
+    const drawPrice = DRAW_COST[drawSelect.value][priceSelect.value];
+    const discountPercent = discountSelect.value;
+    let remainingCp = Number(inputCP.value);
+    let spinIndex = 0;
+
+    // The first pull costs a flat 1 CP if the coupon is applied, otherwise
+    // it's the normal discounted price.
+    let spinPrice = oneCpCheckbox.checked ? 1 : applyDiscount(drawPrice[spinIndex], discountPercent);
+
+    userCpEl.textContent = remainingCp;
+
+    while (remainingCp >= spinPrice) {
+      remainingCp -= spinPrice;
+      spinIndex += 1;
+      spinPrice = applyDiscount(drawPrice[spinIndex], discountPercent);
     }
-}
 
-function validation(){
-    let cp = inputCP.value;
-    let flag = false;
+    numberOfSpinsEl.textContent = spinIndex;
+    remainingCpEl.textContent = remainingCp;
 
-    if (cp <= 0){
-        inputCP.classList.add('is-invalid');
-        flag = true;
-    }
-    else{
-        inputCP.classList.remove('is-invalid');
+    // Reset then re-apply the "affordable pull" highlight.
+    drawPrice.forEach((_, i) => document.getElementById(`cost-${i}`).classList.remove('red'));
+    for (let i = 0; i < spinIndex; i += 1) {
+      document.getElementById(`cost-${i}`).classList.add('red');
     }
 
-    if (draw.value == '0'){
-        draw.classList.add('is-invalid');
-        flag = true;
-    }
-    else{
-        draw.classList.remove('is-invalid');
-    }
+    hasCalculated = true;
+  }
 
-    if (price.value == '0'){
-        price.classList.add('is-invalid');
-        flag = true;
-    }
-    else{
-        price.classList.remove('is-invalid');
-    }
+  /** Re-renders the breakdown when the "1 CP coupon" checkbox is toggled. */
+  function handleOneCpToggle() {
+    renderCostBreakdown();
+    if (hasCalculated) calculateSpins();
+  }
 
-    if (flag){
-        return false;
-    }
-
-    return true;
-}
-
-function calculate(){
-    if(validation()){
-        const drawPrice = drawCost[draw.value][price.value];
-        let cp = inputCP.value;
-        let off = discount.value;
-        let index = 0;
-        let spinPrice = 1;
-
-        if (!oneCP.checked){
-            spinPrice = parseInt(drawPrice[index] * (100 - off) / 100);
-        }
-
-        document.getElementById('userCP').textContent = cp;
-
-        while (cp >= spinPrice) {
-            cp -= spinPrice;
-            index++;
-            spinPrice = parseInt(drawPrice[index] * (100 - off) / 100);
-        }
-
-        document.getElementById('numberOfSpins').textContent = index;
-        document.getElementById('remainingCP').textContent = cp;
-
-        for (let h = 0; h < drawPrice.length; h++) {
-            document.getElementById('cost-'+h).classList.remove('red');
-        }
-
-        for (let k = 0; k < index; k++){
-            document.getElementById('cost-'+k).classList.add('red');
-        }
-
-        isBtnUsed = true;
-    }
-}
-
-function onecpUpdate(){
-    show();
-    if (isBtnUsed){
-        calculate();
-        return 0;
-    }
-}
-
-function clear(){
-    isBtnUsed = false;
-    document.getElementById('userCP').textContent = 0;
-    document.getElementById('numberOfSpins').textContent = 0;
-    document.getElementById('remainingCP').textContent = 0;
+  /** Resets the calculator back to its initial (no CP entered) state. */
+  function resetCalculator() {
+    hasCalculated = false;
+    userCpEl.textContent = '0';
+    numberOfSpinsEl.textContent = '0';
+    remainingCpEl.textContent = '0';
     inputCP.value = '';
-    if (inputCP.classList.contains('is-invalid')){
-        inputCP.classList.remove('is-invalid')
-    }
-    show();
-}
+    setInvalid(inputCP, false);
+    renderCostBreakdown();
+  }
 
-draw.addEventListener('change', update);
-price.addEventListener('change', show);
-discount.addEventListener('change', show);
-btn.addEventListener('click', calculate);
-oneCP.addEventListener('change', onecpUpdate);
-clearBtn.addEventListener('click', clear)
+  // -------------------------------------------------------------------------
+  // Event bindings
+  // -------------------------------------------------------------------------
+  drawSelect.addEventListener('change', handleDrawChange);
+  priceSelect.addEventListener('change', renderCostBreakdown);
+  discountSelect.addEventListener('change', renderCostBreakdown);
+  calculateBtn.addEventListener('click', calculateSpins);
+  oneCpCheckbox.addEventListener('change', handleOneCpToggle);
+  clearBtn.addEventListener('click', resetCalculator);
+})();

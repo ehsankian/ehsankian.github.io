@@ -1,3 +1,8 @@
+/* ---------------------------------------------------------------------------
+   Global reset
+   Shared across every page (index.html, calculator.html). Bootstrap already
+   sets `box-sizing: border-box` globally, so it isn't repeated here.
+--------------------------------------------------------------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -5,9 +10,14 @@
   text-decoration: none;
   font-family: sans-serif;
 }
+
 ul {
   list-style: none;
 }
-.more{
+
+/* ---------------------------------------------------------------------------
+   Homepage-specific
+--------------------------------------------------------------------------- */
+.more {
   margin-top: 4rem;
 }

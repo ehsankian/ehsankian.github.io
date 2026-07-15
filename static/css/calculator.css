@@ -1,12 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-decoration: none;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
+/* ---------------------------------------------------------------------------
+   Calculator page-specific styles
+   Base reset (margin/padding/box-sizing/etc.) lives in index.css, which is
+   loaded before this file on calculator.html.
+--------------------------------------------------------------------------- */
 
+/* Hero gradient background for the calculator page.
+   Solid fallback color first for browsers without gradient support. */
 .bggrad {
   background: #f0d796;
   background: linear-gradient(
@@ -15,21 +14,21 @@
     rgba(230, 225, 220, 1) 50%,
     rgba(30, 44, 61, 1) 100%
   );
-
 }
 
-main{
-    min-height: 90vh;
+main {
+  min-height: 90vh;
 }
 
-.red{
-    color: orangered;
+/* Highlights the pulls the user's CP can afford. */
+.red {
+  color: orangered;
 }
 
-
-
+/* Visual divider between the CP-input column and the cost-breakdown column
+   on small screens, where they sit side by side (col-6) below md. */
 @media screen and (max-width: 768px) {
-    .left-border{
-    border-left:1px solid #dee2ed ;
-}
+  .left-border {
+    border-left: 1px solid #dee2ed;
+  }
 }
