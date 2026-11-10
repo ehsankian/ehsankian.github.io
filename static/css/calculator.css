@@ -1,34 +1,297 @@
 /* ---------------------------------------------------------------------------
-   Calculator page-specific styles
-   Base reset (margin/padding/box-sizing/etc.) lives in index.css, which is
-   loaded before this file on calculator.html.
+   Calculator page styles
+   Tokens and the global reset live in index.css (loaded first).
 --------------------------------------------------------------------------- */
-
-/* Hero gradient background for the calculator page.
-   Solid fallback color first for browsers without gradient support. */
-.bggrad {
-  background: #f0d796;
-  background: linear-gradient(
-    90deg,
-    rgba(240, 215, 150, 1) 0%,
-    rgba(230, 225, 220, 1) 50%,
-    rgba(30, 44, 61, 1) 100%
-  );
+.calc-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 122, 26, 0.16), transparent 40%),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(80, 120, 255, 0.12),
+      transparent 45%
+    ),
+    var(--bg);
 }
 
-main {
-  min-height: 90vh;
+/* ---- Main card ---- */
+.calc-card {
+  --bs-body-color: var(--text);
+  --bs-border-color: var(--border);
+  --bs-border-radius: 0.75rem;
+
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  padding: 1.5rem;
 }
 
-/* Highlights the pulls the user's CP can afford. */
-.red {
-  color: orangered;
-}
-
-/* Visual divider between the CP-input column and the cost-breakdown column
-   on small screens, where they sit side by side (col-6) below md. */
-@media screen and (max-width: 768px) {
-  .left-border {
-    border-left: 1px solid #dee2ed;
+@media (min-width: 768px) {
+  .calc-card {
+    padding: 2rem;
   }
+}
+
+.calc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.calc-title {
+  font-size: clamp(1.6rem, 2.5vw + 1rem, 2.2rem);
+  font-weight: 800;
+}
+
+.header-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.9rem;
+  font-size: 1.25rem;
+  color: #111;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 10px 28px var(--accent-glow);
+}
+
+/* ---- Form controls on dark background ---- */
+.calc-card .form-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.calc-card .form-select,
+.calc-card .form-control {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.7rem 0.9rem;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.calc-card .form-select {
+  --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffb347' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  padding-right: 2.5rem;
+}
+
+.calc-card .form-select option {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+.calc-card .form-select:focus,
+.calc-card .form-control:focus {
+  background-color: var(--surface);
+  color: var(--text);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.25rem var(--accent-glow);
+}
+
+.calc-card .form-select.is-invalid,
+.calc-card .form-control.is-invalid {
+  border-color: #ff5d5d;
+}
+
+.calc-card .form-select:disabled {
+  opacity: 0.45;
+}
+
+.calc-card .input-group-text {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--accent-2);
+  font-weight: 700;
+}
+
+/* ---- Panels ---- */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.panel-title i {
+  color: var(--accent);
+}
+
+/* ---- Coupon toggle ---- */
+.coupon {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1rem;
+  border: 1px dashed rgba(255, 179, 71, 0.45);
+  border-radius: 0.75rem;
+  background: rgba(255, 179, 71, 0.06);
+}
+
+.coupon .form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  cursor: pointer;
+  background-color: var(--surface-strong);
+  border-color: var(--muted);
+}
+
+.coupon .form-check-input:checked {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.coupon .form-check-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.25rem var(--accent-glow);
+}
+
+.coupon .form-check-label {
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.coupon .form-check-label i {
+  color: var(--accent-2);
+}
+
+/* ---- Cost breakdown: one pill per pull ---- */
+#result {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+}
+
+#result:empty::before {
+  content: "Pick a draw to see the cost of each pull.";
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+#result span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+#result span::before {
+  content: "#" attr(data-pull);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Pulls the user can afford */
+#result span.red {
+  background: rgba(255, 122, 26, 0.15);
+  border-color: var(--accent);
+  color: var(--accent-2);
+}
+
+#result span.red::before {
+  color: var(--accent-2);
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-weight: 600;
+}
+
+#total {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Summary stats ---- */
+.stats {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.9rem;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-highlight {
+  border-color: var(--accent);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 122, 26, 0.18),
+    rgba(255, 179, 71, 0.06)
+  );
+  box-shadow: 0 8px 24px rgba(255, 122, 26, 0.12);
+}
+
+.stat-highlight .stat-value {
+  color: var(--accent-2);
 }

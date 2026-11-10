@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/static/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link href="/static/css/index.css" rel="stylesheet" />
 
   <title>Homepage | Ehsan Kian</title>
@@ -12,15 +13,18 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="Main navigation">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">Ehsan Kian</a>
+    <nav class="navbar navbar-expand-lg site-nav" aria-label="Main navigation">
+      <div class="container">
+        <a class="navbar-brand brand" href="index.html">
+          <i class="fa-solid fa-gamepad brand-icon" aria-hidden="true"></i>
+          Ehsan Kian
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
+          <div class="navbar-nav ms-auto">
             <a class="nav-link active" aria-current="page" href="index.html">Home</a>
             <a class="nav-link" href="#">Features</a>
             <a class="nav-link" href="#">Pricing</a>
@@ -31,19 +35,46 @@
   </header>
 
   <main>
-    <section class="row d-flex justify-content-center bg-light-subtle p-3">
-      <div class="col-6">
-        <img src="/static/images/codm-characters.jpg" alt="Call of Duty Mobile character roster" class="img-thumbnail rounded">
-      </div>
-      <div class="col-4 d-flex flex-column justify-content-center align-items-center">
-        <h1>Codm Lucky Draw</h1>
-        <p>Calculate how much CP you need</p>
-        <a class="btn btn-primary w-50 more" href="calculator.html" role="button">More</a>
+    <section class="hero">
+      <div class="container py-5">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6 text-center text-lg-start">
+            <span class="pill mb-4">
+              <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+              Call of Duty Mobile
+            </span>
+            <h1 class="hero-title mb-3">Codm Lucky Draw</h1>
+            <p class="hero-sub mx-auto mx-lg-0">Calculate how much CP you need</p>
+
+            <ul class="chip-list justify-content-center justify-content-lg-start my-4">
+              <li class="chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Instant results</li>
+              <li class="chip"><i class="fa-solid fa-tags" aria-hidden="true"></i> Discount aware</li>
+              <li class="chip"><i class="fa-solid fa-ticket" aria-hidden="true"></i> 1 CP coupon</li>
+            </ul>
+
+            <a class="btn btn-accent btn-lg px-4 py-3" href="calculator.html" role="button">
+              Open Calculator
+              <i class="fa-solid fa-arrow-right ms-2" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <div class="col-lg-6 order-first order-lg-last">
+            <div class="hero-media">
+              <img src="/static/images/codm-characters.jpg" alt="Call of Duty Mobile character roster"
+                class="img-fluid">
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer></footer>
+  <footer class="site-footer">
+    <div class="container d-flex flex-column flex-sm-row justify-content-between gap-2">
+      <span>© Ehsan Kian</span>
+      <span>Codm Lucky Draw Calculator</span>
+    </div>
+  </footer>
 
   <script src="/static/js/bootstrap.bundle.js" defer></script>
 </body>

@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link href="/static/css/index.css" rel="stylesheet" />
     <link rel="stylesheet" href="/static/css/calculator.css">
 
@@ -13,16 +14,19 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="Main navigation">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">Ehsan Kian</a>
+        <nav class="navbar navbar-expand-lg site-nav" aria-label="Main navigation">
+            <div class="container">
+                <a class="navbar-brand brand" href="index.html">
+                    <i class="fa-solid fa-gamepad brand-icon" aria-hidden="true"></i>
+                    Ehsan Kian
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
+                    <div class="navbar-nav ms-auto">
                         <a class="nav-link" href="index.html">Home</a>
                         <a class="nav-link" href="#">Features</a>
                         <a class="nav-link" href="#">Pricing</a>
@@ -32,116 +36,140 @@
         </nav>
     </header>
 
-    <main class="bggrad p-3">
-        <section class="col-lg-10 col-xxl-7 container-fluid border border-black rounded bg-body-tertiary mb-1"
-            aria-labelledby="luckyDrawHeading">
-            <h1 id="luckyDrawHeading" class="h2 pt-3">Lucky Draw</h1>
-            <hr>
-
-            <form novalidate>
-                <div class="row mx-0">
-                    <div class="col-6 col-md-5">
-                        <label for="draw" class="form-label">Draw</label>
-                        <select id="draw" class="form-select">
-                            <option value="0" selected>Choose...</option>
-                            <option value="1">Mythic Character</option>
-                            <option value="2">Mythic Gun</option>
-                            <option value="3">Legendary Character</option>
-                            <option value="4">Legendary Gun (Reactive)</option>
-                            <option value="5">Legendary Gun (Non-reactive)</option>
-                            <option value="6">Legendary Gun (7 Draws)</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select a valid Draw.
-                        </div>
+    <main class="calc-page">
+        <div class="container py-4 py-lg-5">
+            <section class="calc-card" aria-labelledby="luckyDrawHeading">
+                <div class="calc-header">
+                    <div>
+                        <p class="eyebrow">Call of Duty Mobile</p>
+                        <h1 id="luckyDrawHeading" class="calc-title">Lucky Draw</h1>
                     </div>
-                    <div class="col-6 col-md-4">
-                        <label for="price" class="form-label">First draw price</label>
-                        <select id="price" class="form-select">
-                            <option value="0" selected>Choose...</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select a first draw price.
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3 mt-3 mt-sm-0">
-                        <label for="discount" class="form-label">Discount</label>
-                        <select id="discount" class="form-select">
-                            <option value="0" id="zeroDiscount">0%</option>
-                            <option value="10">10%</option>
-                            <option value="15">15%</option>
-                            <option value="20">20%</option>
-                        </select>
-                    </div>
+                    <i class="fa-solid fa-calculator header-icon" aria-hidden="true"></i>
                 </div>
 
-                <hr class="mb-0">
-
-                <div class="row mx-0">
-                    <div class="col-6 py-3 col-md-4 border-end left-border">
-                        <div class="input-group mb-3">
-                            <input type="number" class="form-control" name="cp" id="inputCP"
-                                aria-describedby="inputCPUnit" min="0">
-                            <span class="input-group-text" id="inputCPUnit">CP</span>
-                            <div class="invalid-feedback">
-                                CP &gt; 0
-                            </div>
+                <form novalidate>
+                    <!-- Draw settings -->
+                    <div class="row g-3">
+                        <div class="col-12 col-md-5">
+                            <label for="draw" class="form-label">Draw</label>
+                            <select id="draw" class="form-select">
+                                <option value="0" selected>Choose...</option>
+                                <option value="1">Mythic Character</option>
+                                <option value="2">Mythic Gun</option>
+                                <option value="3">Legendary Character</option>
+                                <option value="4">Legendary Gun (Reactive)</option>
+                                <option value="5">Legendary Gun (Non-reactive)</option>
+                                <option value="6">Legendary Gun (7 Draws)</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a valid Draw.</div>
                         </div>
 
-                        <div class="row d-flex flex-column g-3 flex-sm-row justify-content-between m-0">
-                            <div class="col-sm-5 p-0">
-                                <button type="button" class="btn btn-primary w-100" id="calculate">Calculate</button>
-                            </div>
-                            <div class="col-sm-5 p-0">
-                                <button type="button" class="btn btn-primary w-100" id="clear">Clear</button>
-                            </div>
+                        <div class="col-12 col-md-4">
+                            <label for="price" class="form-label">First draw price</label>
+                            <select id="price" class="form-select">
+                                <option value="0" selected>Choose...</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a first draw price.</div>
                         </div>
 
-                        <div class="mt-4 d-none row" id="onecpdiv">
-                            <div class="col-1">
-                                <input type="checkbox" name="upgrade" id="onecp">
-                            </div>
-                            <div class="col">
-                                <label for="onecp" class="text-wrap">Using 1 CP coupon</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 py-3 col-md-4 border-end">
-                        <div class="row" aria-live="polite">
-                            <p>Cost:</p>
-                            <div id="result"></div>
-                            <hr class="my-3">
-                            <p>Total: <span id="total"></span></p>
+                        <div class="col-12 col-md-3">
+                            <label for="discount" class="form-label">Discount</label>
+                            <select id="discount" class="form-select">
+                                <option value="0" id="zeroDiscount">0%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                                <option value="20">20%</option>
+                            </select>
                         </div>
                     </div>
 
-                    <hr class="d-md-none">
+                    <hr class="my-4">
 
-                    <div class="col-12 pt-3 col-md-4">
-                        <p aria-live="polite">
-                            Awesome! With your current <span id="userCP" class="red">0</span>
-                            CP, you're all set to spin the Lucky Draw <span id="numberOfSpins" class="red">0</span>
-                            times. After those spins, you'll still have <span id="remainingCP" class="red">0</span>
-                            CP remaining.
-                        </p>
+                    <!-- Calculator panels -->
+                    <div class="row g-4">
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="panel h-100">
+                                <label for="inputCP" class="form-label">Your CP</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-coins" aria-hidden="true"></i>
+                                    </span>
+                                    <input type="number" class="form-control" name="cp" id="inputCP"
+                                        aria-describedby="inputCPUnit" min="0" placeholder="0">
+                                    <span class="input-group-text" id="inputCPUnit">CP</span>
+                                    <div class="invalid-feedback">CP &gt; 0</div>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <button type="button" class="btn btn-accent flex-fill"
+                                        id="calculate">Calculate</button>
+                                    <button type="button" class="btn btn-ghost flex-fill" id="clear">Clear</button>
+                                </div>
+
+                                <div class="coupon d-none" id="onecpdiv">
+                                    <div class="form-check d-flex align-items-center gap-2 ps-0 m-0">
+                                        <input class="form-check-input m-0" type="checkbox" name="upgrade" id="onecp">
+                                        <label class="form-check-label" for="onecp">
+                                            <i class="fa-solid fa-ticket me-1" aria-hidden="true"></i>Using 1 CP coupon
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="panel h-100">
+                                <h2 class="panel-title">
+                                    <i class="fa-solid fa-list-ol" aria-hidden="true"></i>
+                                    Cost per pull
+                                </h2>
+                                <div id="result" aria-live="polite"></div>
+                                <div class="total">
+                                    <span>Total</span>
+                                    <strong id="total"></strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-4">
+                            <div class="panel h-100">
+                                <h2 class="panel-title">
+                                    <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
+                                    Summary
+                                </h2>
+                                <div class="stats" aria-live="polite">
+                                    <div class="stat">
+                                        <span class="stat-label">Your CP</span>
+                                        <span class="stat-value" id="userCP">0</span>
+                                    </div>
+                                    <div class="stat stat-highlight">
+                                        <span class="stat-label">Spins</span>
+                                        <span class="stat-value" id="numberOfSpins">0</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Remaining CP</span>
+                                        <span class="stat-value" id="remainingCP">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </section>
+                </form>
+            </section>
 
-        <!-- Upgrade section: hidden until this feature is implemented -->
-        <section class="d-none col-lg-10 col-xxl-7 container-fluid p-3 border border-black rounded bg-body-tertiary"
-            id="upgrade">
-            <h2>Upgrade</h2>
-            <hr class="mb-4">
-            <div class="row mx-0">
-                <div class="col"></div>
-            </div>
-        </section>
+            <!-- Upgrade section: hidden until this feature is implemented -->
+            <section class="d-none calc-card mt-4" id="upgrade" aria-labelledby="upgradeHeading">
+                <h2 id="upgradeHeading" class="h4">Upgrade</h2>
+            </section>
+        </div>
     </main>
 
-    <footer></footer>
+    <footer class="site-footer">
+        <div class="container d-flex flex-column flex-sm-row justify-content-between gap-2">
+            <span>© Ehsan Kian</span>
+            <span>Codm Lucky Draw Calculator</span>
+        </div>
+    </footer>
 
     <script src="/static/js/bootstrap.bundle.js" defer></script>
     <script src="/static/js/calculator.js" defer></script>
