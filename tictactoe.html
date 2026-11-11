@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link href="/static/css/index.css" rel="stylesheet" />
+    <link href="/static/css/tictactoe.css" rel="stylesheet" />
+
+    <title>Tic Tac Toe | Ehsan Kian</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg site-nav" aria-label="Main navigation">
+            <div class="container">
+                <a class="navbar-brand brand" href="index.html">
+                    <i class="fa-solid fa-gamepad brand-icon" aria-hidden="true"></i>
+                    Ehsan Kian
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="codm.html">Codm</a>
+                        <a class="nav-link" href="index.html#games">Games</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="ttt-page">
+        <div class="container py-4 py-lg-5">
+            <section class="ttt-card" aria-labelledby="tttHeading">
+                <div class="ttt-header">
+                    <div>
+                        <p class="eyebrow">Simple Game</p>
+                        <h1 id="tttHeading" class="ttt-title">Tic Tac Toe</h1>
+                    </div>
+                    <i class="fa-solid fa-xmark header-icon" aria-hidden="true"></i>
+                </div>
+
+                <div class="ttt-layout">
+                    <div class="ttt-main">
+                        <p id="status" class="ttt-status" aria-live="polite"></p>
+                        <div id="board" class="ttt-board"></div>
+                        <button type="button" id="restart" class="btn btn-ghost">New Game</button>
+                    </div>
+
+                    <aside class="ttt-side">
+                        <div class="ttt-group">
+                            <span class="ttt-label">Mode</span>
+                            <div class="seg" role="group" aria-label="Game mode">
+                                <button type="button" class="seg-btn" data-mode="pvp">Two Players</button>
+                                <button type="button" class="seg-btn" data-mode="ai">vs AI</button>
+                            </div>
+                        </div>
+
+                        <div class="ttt-group" id="levelGroup" hidden>
+                            <span class="ttt-label">Difficulty</span>
+                            <div class="seg" role="group" aria-label="Difficulty">
+                                <button type="button" class="seg-btn" data-level="easy">Easy</button>
+                                <button type="button" class="seg-btn" data-level="medium">Medium</button>
+                                <button type="button" class="seg-btn" data-level="hard">Hard</button>
+                            </div>
+                        </div>
+
+                        <div class="ttt-stats" id="stats" hidden>
+                            <div class="ttt-stat">
+                                <span class="ttt-stat-label">Wins</span>
+                                <span class="ttt-stat-value" id="wins">0</span>
+                            </div>
+                            <div class="ttt-stat">
+                                <span class="ttt-stat-label">Losses</span>
+                                <span class="ttt-stat-value" id="losses">0</span>
+                            </div>
+                            <div class="ttt-stat">
+                                <span class="ttt-stat-label">Draws</span>
+                                <span class="ttt-stat-value" id="draws">0</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container d-flex flex-column flex-sm-row justify-content-between gap-2">
+            <span>© Ehsan Kian</span>
+            <span>Tic Tac Toe</span>
+        </div>
+    </footer>
+
+    <script src="/static/js/bootstrap.bundle.js" defer></script>
+    <script src="/static/js/tictactoe.js" defer></script>
+</body>
+
+</html>
